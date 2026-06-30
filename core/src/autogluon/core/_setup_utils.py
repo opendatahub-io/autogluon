@@ -33,7 +33,6 @@ DEPENDENT_PACKAGES = {
     "async_timeout": ">=4.0,<6",  # Major version cap
     "transformers[sentencepiece]": ">=5.10.0,<6",  # CVE-2026-1839 fixed in >=5.0.0rc3
     "huggingface_hub[torch]": ">=1.5.0,<2.0",  # required by transformers>=5
-    "peft": ">=0.18.1,<0.20",  # >=0.16 imports HybridCache removed in transformers>=5
     "accelerate": ">=0.34.0,<2.0",
     "typing-extensions": ">=4.0,<5",
     "joblib": ">=1.2,<1.7",  # <{N+1} upper cap
