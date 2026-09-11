@@ -962,6 +962,7 @@ class TabularNeuralNetTorchModel(AbstractNeuralNetworkModel):
         return {
             "can_estimate_memory_usage_static": True,
             "supports_learning_curves": True,
+            "reset_torch_threads": True,
         }
 
     def _more_tags(self):
