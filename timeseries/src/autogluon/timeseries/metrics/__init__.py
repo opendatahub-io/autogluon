@@ -70,6 +70,21 @@ METRIC_ALIASES: dict[str, str] = {
     "weighted_absolute_percentage_error_with_bias": "WAPEB",
 }
 
+# Provide lowercase aliases for metrics for consistency with autogluon.tabular
+METRIC_ALIASES: dict[str, str] = {
+    "mean_absolute_error": "MAE",
+    "mean_squared_error": "MSE",
+    "root_mean_squared_error": "RMSE",
+    "root_mean_squared_logarithmic_error": "RMSLE",
+    "mean_absolute_percentage_error": "MAPE",
+    "symmetric_mean_absolute_percentage_error": "SMAPE",
+    "mean_absolute_scaled_error": "MASE",
+    "root_mean_squared_scaled_error": "RMSSE",
+    "weighted_absolute_percentage_error": "WAPE",
+    "weighted_quantile_loss": "WQL",
+    "scaled_quantile_loss": "SQL",
+}
+
 # For backward compatibility
 DEPRECATED_METRICS = {
     "mean_wQuantileLoss": "WQL",

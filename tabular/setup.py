@@ -67,11 +67,7 @@ extras_require = {
     "fastai": [
         "spacy<3.9",
         "torch",  # version range defined in `core/_setup_utils.py`
-        # Held below 2.8.8: that release requires fastcore>=1.14.6, but the highest fastcore 1.x
-        # is 1.14.5, so it is unreachable under the fastcore<2 cap below. Lifting that cap needs
-        # the removed L.starmap usage replaced first.
-        "fastai>=2.3.1,<2.8.8",  # Cap for major version
-        "fastcore<2",  # Breaking change in v2: removed L.starmap, which breaks fastai models
+        "fastai>2.8.7,<2.9",  # Only 2.8.8 is compatible with fastcore>2; fastai doesn't limit the fastcore dependency correctly
     ],
     "tabm": [
         "torch",  # version range defined in `core/_setup_utils.py`

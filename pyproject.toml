@@ -5,7 +5,24 @@ members = ["common", "core", "features", "tabular", "timeseries", "multimodal", 
 
 # Pin resolution so a newly-released dep can't make `uv lock --check` go red. Bump when running `uv lock`.
 [tool.uv]
-exclude-newer = "2026-09-14"
+exclude-newer = "2026-09-15T00:00:00Z"
+
+# TensorRT's source packages cannot build metadata on macOS during uv's universal resolution.
+# Keep these entries aligned with the TensorRT version and dependencies in uv.lock.
+[[tool.uv.dependency-metadata]]
+name = "tensorrt"
+version = "10.9.0.34"
+requires-dist = ["tensorrt-cu12==10.9.0.34"]
+
+[[tool.uv.dependency-metadata]]
+name = "tensorrt-cu12"
+version = "10.9.0.34"
+requires-dist = ["tensorrt-cu12-bindings==10.9.0.34", "tensorrt-cu12-libs==10.9.0.34"]
+
+[[tool.uv.dependency-metadata]]
+name = "tensorrt-cu12-libs"
+version = "10.9.0.34"
+requires-dist = ["nvidia-cuda-runtime-cu12"]
 
 # Resolve sibling autogluon packages to the local workspace members instead of PyPI for dev.
 # Each member's deps (incl. shared third-party caps and the exact `==<version>` sibling pins) are
