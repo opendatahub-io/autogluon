@@ -39,24 +39,12 @@ extras_require = {
         "catboost>=1.2,<1.3",
     ],
     "xgboost": [
-        # The CPU-only build. The default `xgboost` wheel depends on `nvidia-nccl-cu12` while
-        # torch depends on `nvidia-nccl-cu13`, and both wheels ship
-        # `nvidia/nccl/lib/libnccl.so.2`. With both installed, the NCCL that torch loads is
-        # whichever wheel wrote that path last rather than the one torch pins, and uninstalling
-        # either wheel deletes the file the other still needs. Observed on a fresh
-        # `[tabarena]` install: nccl-cu12 2.27.5 landed last and torch 2.13 then failed to
-        # import with `undefined symbol: ncclCommResume`. `xgboost-cpu` has no NCCL dependency,
-        # which removes the overlap. Trade-off: it is built without CUDA, so XGBoost trains on
-        # CPU even when GPUs are allocated (it warns and falls back); no GPU-targeted portfolio
-        # contains an XGB config. Revisit if xgboost ships a cu13 wheel or makes NCCL optional
-        # (https://github.com/dmlc/xgboost/issues/10729).
-        #
-        # `xgboost-cpu` has never published a macOS wheel (CUDA is why the extra package
-        # exists, and there is no CUDA XGBoost on Darwin). The ordinary macOS `xgboost`
-        # wheel is already CPU-only and has no NCCL pin, so use that there.
-        # https://github.com/autogluon/autogluon/issues/5881
-        "xgboost-cpu>=2.1.1,<3.4; platform_system != 'Darwin'",  # >=2.1.1 is the earliest xgboost-cpu release; <{N+1} upper cap
-        "xgboost>=2.1.1,<3.4; platform_system == 'Darwin'",
+        # The RHAI CPU index lacks `xgboost-cpu` on ppc64le and s390x, so use
+        # `xgboost` on all supported architectures.
+        # https://redhat.atlassian.net/browse/RHAI-6487
+        # CUDA-enabled PyPI wheels can still conflict with Torch over NCCL:
+        # https://github.com/dmlc/xgboost/issues/10729
+        "xgboost>=2.1.1,<3.4",
     ],
     "realmlp": [
         "pytabkit>=1.7.2,<1.8",
